@@ -1,0 +1,349 @@
+<?xml version="1.0"?>
+<sdf version='1.6'>
+<model name='CLOi_porter'>
+  <link name='link_MainBody'>
+    <inertial>
+      <mass>60</mass>
+      <inertia>
+        <ixx>11.12720579</ixx>
+        <ixy>0</ixy>
+        <ixz>0</ixz>
+        <iyy>11.12720579</iyy>
+        <iyz>0</iyz>
+        <izz>4.97425747</izz>
+      </inertia>
+      <pose>0 0 0.25 0 -0 0</pose>
+    </inertial>
+
+    <gravity>1</gravity>
+    <self_collide>0</self_collide>
+    <kinematic>0</kinematic>
+    <enable_wind>0</enable_wind>
+
+    <visual name='visual_main_base'>
+      <geometry>
+        <mesh>
+          <uri>model://CLOi_porter/meshes/CLOi_porter.obj</uri>
+          <scale>1 1 1</scale>
+        </mesh>
+      </geometry>
+      <material>
+        <emissive>0.45 0.45 0.45 1</emissive>
+      </material>
+      <transparency>0</transparency>
+      <cast_shadows>0</cast_shadows>
+    </visual>
+
+    <collision name='collision_main_base'>
+      <max_contacts>2</max_contacts>
+      <geometry>
+        <mesh>
+          <uri>model://CLOi_porter/meshes/CLOi_porter.obj</uri>
+          <scale>1 1 1</scale>
+        </mesh>
+      </geometry>
+      <surface>
+        <friction>
+          <ode>
+            <mu>0.85</mu>
+            <mu2>0.80</mu2>
+            <fdir1>0 0 0</fdir1>
+            <slip1>0.01</slip1>
+            <slip2>0.01</slip2>
+          </ode>
+        </friction>
+        <contact>
+          <poissons_ratio>0.39</poissons_ratio>
+          <elastic_modulus>0.39</elastic_modulus>
+          <ode>
+            <soft_cfm>0.05</soft_cfm>
+            <soft_erp>0.40</soft_erp>
+            <kp>1e+12</kp>
+            <kd>0.01</kd>
+            <min_depth>0.001</min_depth>
+          </ode>
+        </contact>
+      </surface>
+    </collision>
+    <battery name="linear_battery">
+      <voltage>42</voltage>
+    </battery>
+  </link>
+
+  <include>
+    <uri>model://robot_wheel_suspension</uri>
+    <name>SuspensionLeft</name>
+    <pose>0 0.158 0.09 0 0 0</pose>
+  </include>
+  <include>
+    <uri>model://CLOi_porter_wheel</uri>
+    <name>wheel_left</name>
+    <pose>0.001 0.225 0.08 -1.5707962 0 0</pose>
+  </include>
+  <joint name="Joint_link_MainBody_SuspLeft" type="prismatic">
+    <parent>link_MainBody</parent>
+    <child>SuspensionLeft::link</child>
+    <axis>
+      <xyz>0 0 1</xyz>
+      <limit>
+        <upper>0.04</upper>
+        <lower>0.0</lower>
+      </limit>
+      <dynamics>
+        <friction>0.5</friction>
+        <damping>1000</damping>
+        <spring_stiffness>10000</spring_stiffness>
+      </dynamics>
+    </axis>
+  </joint>
+  <joint name='link_MainBody_wheel_left' type='revolute'>
+    <parent>SuspensionLeft::link</parent>
+    <child>wheel_left::link</child>
+    <axis>
+      <xyz>0 0 1</xyz>
+      <dynamics>
+        <friction>0.01</friction>
+      </dynamics>
+    </axis>
+  </joint>
+
+  <include>
+    <uri>model://robot_wheel_suspension</uri>
+    <name>SuspensionRight</name>
+    <pose>0 -0.158 0.09 0 0 0</pose>
+  </include>
+  <include>
+    <uri>model://CLOi_porter_wheel</uri>
+    <name>wheel_right</name>
+    <pose>0.001 -0.225 0.08 1.5707962 0 0</pose>
+  </include>
+  <joint name="Joint_link_MainBody_SuspRight" type="prismatic">
+    <parent>link_MainBody</parent>
+    <child>SuspensionRight::link</child>
+    <axis>
+      <xyz>0 0 1</xyz>
+      <limit>
+        <upper>0.04</upper>
+        <lower>0.00</lower>
+      </limit>
+      <dynamics>
+        <friction>0.5</friction>
+        <damping>1000</damping>
+        <spring_stiffness>10000</spring_stiffness>
+      </dynamics>
+    </axis>
+  </joint>
+  <joint name='link_MainBody_wheel_right' type='revolute'>
+    <parent>SuspensionRight::link</parent>
+    <child>wheel_right::link</child>
+    <axis>
+      <xyz>0 0 -1</xyz>
+      <dynamics>
+        <friction>0.01</friction>
+      </dynamics>
+    </axis>
+  </joint>
+
+  <include>
+    <uri>model://CLOi_porter_caster</uri>
+    <name>FL_caster</name>
+    <pose>0.22 0.1 0.066 0 0 0</pose>
+  </include>
+  <joint name='link_MainBody_Caster_FL' type='revolute'>
+    <parent>link_MainBody</parent>
+    <child>FL_caster::link</child>
+    <axis>
+      <xyz>0 0 1</xyz>
+      <dynamics>
+        <friction>0.3</friction>
+      </dynamics>
+    </axis>
+  </joint>
+
+  <include>
+    <uri>model://CLOi_porter_caster</uri>
+    <name>FR_caster</name>
+    <pose>0.22 -0.1 0.066 0 0 0</pose>
+  </include>
+  <joint name='link_MainBody_Caster_FR' type='revolute'>
+    <parent>link_MainBody</parent>
+    <child>FR_caster::link</child>
+    <axis>
+      <xyz>0 0 1</xyz>
+      <dynamics>
+        <friction>0.3</friction>
+      </dynamics>
+    </axis>
+  </joint>
+
+  <include>
+    <uri>model://CLOi_porter_caster</uri>
+    <name>RL_caster</name>
+    <pose>-0.220 0.1 0.066 0 0 0</pose>
+  </include>
+  <joint name='link_MainBody_Caster_RL' type='revolute'>
+    <parent>link_MainBody</parent>
+    <child>RL_caster::link</child>
+    <axis>
+      <xyz>0 0 1</xyz>
+      <dynamics>
+        <friction>0.3</friction>
+      </dynamics>
+    </axis>
+  </joint>
+
+  <include>
+    <uri>model://CLOi_porter_caster</uri>
+    <name>RR_caster</name>
+    <pose>-0.220 -0.1 0.066 0 0 0</pose>
+  </include>
+  <joint name='link_MainBody_Caster_RR' type='revolute'>
+    <parent>link_MainBody</parent>
+    <child>RR_caster::link</child>
+    <axis>
+      <xyz>0 0 1</xyz>
+      <dynamics>
+        <friction>0.3</friction>
+      </dynamics>
+    </axis>
+  </joint>
+
+  <!-- <include>
+    <uri>model://CLOi_porter_multicam</uri>
+    <name>multi_camera</name>
+    <pose>-0.0485 0 0.9483 0 -1.5707962 0</pose>
+  </include>
+  <joint name='link_MainBody_JOINT_multicam' type='fixed'>
+    <parent>link_MainBody</parent>
+    <child>multi_camera::link_multicam</child>
+  </joint> -->
+
+  <include>
+    <uri>model://robot_camera</uri>
+    <name>camera</name>
+    <pose>0.344 0 1.0141 0 0 0</pose>
+  </include>
+  <joint name='link_MainBody_JOINT_camera_front' type='fixed'>
+    <parent>link_MainBody</parent>
+    <child>camera::link</child>
+  </joint>
+
+  <!-- <include>
+    <uri>model://robot_depthcam</uri>
+    <name>depthcamera</name>
+    <pose>0.344 0 1.0141 0 0 0</pose>
+  </include>
+  <joint name='link_MainBody_JOINT_depthcamera_front' type='fixed'>
+    <parent>link_MainBody</parent>
+    <child>depthcamera::link</child>
+  </joint>
+
+  <include>
+    <uri>model://intel_D435</uri>
+    <name>realsense</name>
+    <pose>0.344 0 1.0141 0 0 0</pose>
+  </include>
+  <joint name='link_MainBody_JOINT_realsense_front' type='fixed'>
+    <parent>link_MainBody</parent>
+    <child>realsense::link</child>
+  </joint> -->
+
+  <include>
+    <uri>model://robot_IMU</uri>
+    <name>imu</name>
+    <pose>0 0 0.19 0 0 0</pose>
+  </include>
+  <joint name='link_MainBody_JOINT_imu' type='fixed'>
+    <parent>link_MainBody</parent>
+    <child>imu::link_imu</child>
+  </joint>
+
+  <include>
+    <uri>model://hokuyo_UAM05LPT301_gpu</uri>
+    <name>lidar</name>
+    <pose>0.270000 0 0.1125 0 0 0</pose>
+  </include>
+  <joint name='link_MainBody_JOINT_lidar' type='fixed'>
+    <parent>link_MainBody</parent>
+    <child>lidar::UAM05LPT301_link</child>
+  </joint>
+
+  <!-- <include>
+    <uri>model://robot_USS</uri>
+    <name>USS_left1</name>
+    <pose>-0.0315 0.265 0.3505 1.5707962 0 0.1</pose>
+  </include>
+  <joint name='Joint_USS_left1' type='fixed'>
+    <parent>link_MainBody</parent>
+    <child>USS_left1::link_sonar</child>
+  </joint>
+
+  <include>
+    <uri>model://robot_USS</uri>
+    <name>USS_right1</name>
+    <pose>-0.0315 -0.265 0.3505 -1.5707962 0 0.1</pose>
+  </include>
+  <joint name='Joint_USS_right1' type='fixed'>
+    <parent>link_MainBody</parent>
+    <child>USS_right1::link_sonar</child>
+  </joint> -->
+
+  <include>
+    <uri>model://robot_GPS</uri>
+    <name>gps</name>
+    <pose>0 0 0.21 0 0 0</pose>
+  </include>
+  <joint name='Joint_GPS' type='fixed'>
+    <parent>link_MainBody</parent>
+    <child>gps::link</child>
+  </joint>
+
+  <!--include>
+  <uri>model://hokuyo_UAM05LPT301_gpu</uri>
+  <name>rear_lidar</name>
+  <pose>-0.270 0 0.1125 0 0 3.14</pose>
+  </include>
+  <joint name='link_MainBody_JOINT_rear_lidar' type='fixed'>
+    <parent>link_MainBody</parent>
+    <child>rear_lidar::UAM05LPT301_link</child>
+  </joint-->
+
+  <plugin name='RobotControl' filename='libMicomPlugin.so'>
+    <PID>
+      <kp>1.0</kp>
+      <ki>0.05</ki>
+      <kd>0.0</kd>
+    </PID>
+    <uss>
+      <!-- <sensor>USS_left1</sensor> -->
+    </uss>
+    <ir>
+      <!-- <sensor>USS_left1</sensor> -->
+    </ir>
+    <magnet>
+    </magnet>
+    <bumper>
+    </bumper>
+    <wheel>
+      <base>0.449</base>
+      <radius>0.0955</radius>
+      <location type="left">wheel_left</location>
+      <location type="right">wheel_right</location>
+      <friction>
+        <motor>0.06</motor>
+        <brake>13.0</brake>
+      </friction>
+    </wheel>
+    <update_rate>20</update_rate>
+    <ros2>
+      <transform_name>
+        <imu>imu</imu>
+        <wheels>
+          <left>wheel_left</left>
+          <right>wheel_right</right>
+        </wheels>
+      </transform_name>
+    </ros2>
+  </plugin>
+</model>
+</sdf>
