@@ -4057,7 +4057,7 @@ GameObject:
   - component: {fileID: 1396745151899000887}
   - component: {fileID: 8473066996342300300}
   - component: {fileID: 3814143690981363612}
-  - component: {fileID: -2109403677192861167}
+  - component: {fileID: 369745563390374750}
   m_Layer: 0
   m_Name: LGCloi
   m_TagString: Untagged
@@ -4208,7 +4208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   driverViewTransform: {fileID: 8018365701858483788}
   cinematicCameraTransforms: []
---- !u!114 &-2109403677192861167
+--- !u!114 &369745563390374750
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4217,11 +4217,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 8708165216760407706}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: faae6f9736416114091d6a504f105145, type: 3}
+  m_Script: {fileID: 11500000, guid: a14ab64e17c4b5c9485166cc2311eacb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  WheelSeparation: 0
+  WheelRadius: 0
   RightWheel: {fileID: 6146014943830137546}
   LeftWheel: {fileID: 280900712905776812}
+  ControlType: 0
+  TargetLinearVelocity: 0
+  TargetAngularVelocity: 0
+  P_Gain: 1
+  I_Gain: 0.05
+  D_Gain: 0
 --- !u!1 &8800240167457930868
 GameObject:
   m_ObjectHideFlags: 0
