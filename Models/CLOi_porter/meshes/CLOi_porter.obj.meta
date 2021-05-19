@@ -3,7 +3,17 @@ guid: a736c22b6e6fc294ba7c73eec40a1839
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CLOi_Base
+    second: {fileID: 2100000, guid: 10b52ba8ecad5564a931ad0c2fdb4310, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: CLOi_Poter
+    second: {fileID: 2100000, guid: 9d43b3eada3d0c045be4c0ba3557ae80, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
