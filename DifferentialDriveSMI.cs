@@ -13,7 +13,8 @@ public class DifferentialDriveSMI : MonoBehaviour, IVehicleDynamics
     private ArticulationBody AB;
     public Vector3 Velocity => AB.velocity;
     public Vector3 AngularVelocity => AB.angularVelocity;
-    public Transform BaseLink  => transform;
+    public Transform BaseLink { get { return BaseLinkTransform; } }
+    public Transform BaseLinkTransform;
     public float AccellInput => RobotController.AccelInput;
     public float SteerInput  => RobotController.SteerInput;
     public bool HandBrake { get; set; } = false;
