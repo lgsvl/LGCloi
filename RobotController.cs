@@ -90,7 +90,7 @@ public class RobotController : AgentController
         string otherLayer = LayerMask.LayerToName(layer);
         var otherRB = collision.gameObject.GetComponent<IAgentController>();
         var otherVel = otherRB != null ? otherRB.Velocity : Vector3.zero;
-        if ((layerMask & (1 << layer)) != 0)
+        if (otherRB != null && (layerMask & (1 << layer)) != 0)
         {
             ApiManager.Instance?.AddCollision(gameObject, collision.gameObject, collision);
             SimulatorManager.Instance.AnalysisManager.IncrementEgoCollision(Controller.GTID, transform.position, Dynamics.Velocity, otherVel, otherLayer);
@@ -104,7 +104,7 @@ public class RobotController : AgentController
         string otherLayer = LayerMask.LayerToName(layer);
         var otherRB = collider.gameObject.GetComponent<IAgentController>();
         var otherVel = otherRB != null ? otherRB.Velocity : Vector3.zero;
-        if ((layerMask & (1 << layer)) != 0)
+        if (otherRB != null && (layerMask & (1 << layer)) != 0)
         {
             ApiManager.Instance?.AddCollision(gameObject, collider.gameObject);
             SimulatorManager.Instance.AnalysisManager.IncrementEgoCollision(Controller.GTID, transform.position, Dynamics.Velocity, otherVel, otherLayer);
